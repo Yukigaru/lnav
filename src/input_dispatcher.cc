@@ -41,6 +41,7 @@
 #include "base/time_util.hh"
 #include "config.h"
 #include "fmt/color.h"
+#include "lnav_util.hh"
 #include "ww898/cp_utf8.hpp"
 
 using namespace ww898;
@@ -65,6 +66,14 @@ input_dispatcher::new_input(const struct timeval& current_time,
                             notcurses* nc,
                             ncinput& ch)
 {
+    if (this->id_processing) {
+        return;
+    }
+    this->id_processing = true;
+    auto processing_guard = finally([this]() {
+        this->id_processing = false;
+    });
+
     std::optional<bool> handled = std::nullopt;
     std::array<char, 32 * 3 + 1> keyseq{0};
     std::string eff_str;

@@ -890,6 +890,9 @@ textview_curses::apply_highlights(attr_line_t& al,
         // the surrounding decorations that are added (for example, the file
         // lines that are inserted at the beginning of the log view).
         auto lr = internal_hl ? body : orig_line;
+        if (internal_hl && lr.lr_end > 8192) {
+            lr.lr_end = 8192;
+        }
         tc_highlight.second.annotate(al, lr);
     }
 }

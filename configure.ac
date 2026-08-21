@@ -45,6 +45,8 @@ AC_ARG_ENABLE([debug],
               AS_HELP_STRING([--enable-debug],
                              [Compile with symbols]))
 
+LNAV_ENABLE_LTO([$enable_debug])
+
 AS_VAR_IF([enable_profiling], [yes],
       [CFLAGS=`echo $CFLAGS | sed 's/-O2//g'`
        CXXFLAGS=`echo $CXXFLAGS | sed 's/-O2//g'`],

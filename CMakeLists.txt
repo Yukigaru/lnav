@@ -13,6 +13,7 @@ project(
 
 include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
+include(cmake/lto.cmake)
 
 find_package(PkgConfig REQUIRED)
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
